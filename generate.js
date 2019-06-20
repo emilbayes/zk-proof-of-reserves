@@ -2,7 +2,7 @@ const accounts = 4
 const bits = 33
 
 function forin (n, exp) {
-  res = []
+  const res = []
   for (var i = 0; i < n; i++) {
     res.push(exp(n))
   }
