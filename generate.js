@@ -54,7 +54,7 @@ def main (${args}) -> (bool):
 
 console.log(script)
 
-function genScalarMult(size) {
+function genScalarMult (size) {
   return `def scalarMult${size}(field[${size}] exponent, field[2] pt, field[10] context) -> (field[2]):
 
     field[2] infinity = [context[2], context[3]]
