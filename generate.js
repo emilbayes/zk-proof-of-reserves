@@ -9,12 +9,12 @@ function forin (n, exp) {
   return res
 }
 
+// commitment, amount_in_bits, blinding_factor, amount,
 const args = [
   forin(accounts, (n) => `private field[2] commitment_${n}`).join(', '),
-  forin(accounts, (n) => `private field[${bits}] amount_${n}`).join(', '),
-  forin(accounts, (n) => `private field amounts_${n}`).join(', '),
+  forin(accounts, (n) => `private field[${bits}] amount_in_bits_${n}`).join(', '),
   forin(accounts, (n) => `private field[256] blinding_factor_${n}`).join(', '),
-  `private field[${bits * accounts}] bits`,
+  forin(accounts, (n) => `private field amounts_${n}`).join(', '),
   `public field total_amount`
 ].join(', ')
 
@@ -36,12 +36,12 @@ def main (${args}) -> (bool):
   field sum_amount = 0
   field res = 0
   ${forin(accounts, (j) => `
-  c_${j} = add(scalarMult${bits}(amount_${j}, [G[4], G[5]], G), scalarMult256(blinding_factor_${j}, H, G), G)
+  c_${j} = add(scalarMult${bits}(amount_in_bits_${j}, [G[4], G[5]], G), scalarMult256(blinding_factor_${j}, H, G), G)
   commitment_${j} == c_${j}
 
   res = 0
   for field i in 0..${bits} do
-    field bit = bits[i + ${j - 1} * ${bits}]
+    field bit = amount_in_bits_${j}[i]
     bit * bit == bit
     res = res + bit * (2 ** i)
   endfor
