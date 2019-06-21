@@ -43,9 +43,10 @@ def main (${args}) -> (bool):
 
   res = 0
   for field i in 0..${bits} do
+    field j = ${bits - 1} - i
     field bit = amount_in_bits_${j}[i]
     bit * bit == bit
-    res = res + bit * (2 ** i)
+    res = res + bit * (2 ** j)
   endfor
 
   amounts_${j} == res
