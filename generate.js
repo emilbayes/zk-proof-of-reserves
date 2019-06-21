@@ -11,7 +11,7 @@ function forin (n, exp) {
 
 // commitment, amount_in_bits, blinding_factor, amount,
 const args = [
-  forin(accounts, (n) => `public field[2] commitment_${n}`).join(', '),
+  forin(accounts, (n) => `field[2] commitment_${n}`).join(', '),
   forin(accounts, (n) => `private field[${bits}] amount_in_bits_${n}`).join(', '),
   forin(accounts, (n) => `private field[256] blinding_factor_${n}`).join(', '),
   forin(accounts, (n) => `private field amounts_${n}`).join(', '),
