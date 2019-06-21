@@ -3,8 +3,8 @@ const bits = 33
 
 function forin (n, exp) {
   const res = []
-  for (var i = 0; i < n; i++) {
-    res.push(exp(n))
+  for (let i = 0; i < n; i++) {
+    res.push(exp(i))
   }
   return res
 }
