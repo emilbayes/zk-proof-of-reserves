@@ -36,7 +36,9 @@ def main (${args}) -> (bool):
   field sum_amount = 0
   field res = 0
   ${forin(accounts, (j) => `
-  c_${j} = add(scalarMult${bits}(amount_in_bits_${j}, [G[4], G[5]], G), scalarMult256(blinding_factor_${j}, H, G), G)
+  Gx = scalarMult${bits}(amount_in_bits_${j}, [G[4], G[5]], G)
+  Hr = scalarMult256(blinding_factor_${j}, H, G)
+  c_${j} = add(Gx, Hr, G)
   commitment_${j} == c_${j}
 
   res = 0
